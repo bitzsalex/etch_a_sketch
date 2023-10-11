@@ -26,5 +26,92 @@
         </div>
       </div>
     </header>
+    <main>
+      <div class="container">
+        <div class="sketch">
+          <div class="sketch__sidebar">
+            <ul class="sketch__menu">
+              <li>
+                <h3>colors</h3>
+                <div class="colors">
+                  <div class="colors__pen">
+                    <input type="color" id="pen_color">
+                    <label for="pen_color">Pen Color</label>
+                    <ul class="colors__recent">
+                      <li><i data-feather="trash-2"></i></li>
+                    </ul>
+                  </div>
+                  <div class="colors__bg">
+                    <input type="color" id="bg_color">
+                    <label for="bg_color">Canvas Color</label>
+                    <ul class="colors__recent">
+                      <li><i data-feather="trash-2"></i></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h3>rainbow togglers</h3>
+                <div class="group">
+                  <div class="group__item">
+                    <input type="radio" id="recent" name="rainbow">
+                    <label for="recent">Recent</label>
+                  </div>
+                  <div class="group__item">
+                    <input type="radio" id="random" name="rainbow">
+                    <label for="random">Random</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h3>shades</h3>
+                <div class="group">
+                  <div class="group__item">
+                    <input type="radio" id="lighten" name="shading">
+                    <label for="lighten">lighten</label>
+                  </div>
+                  <div class="group__item">
+                    <input type="radio" id="darken" name="shading">
+                    <label for="darken">darken</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h3>Erasers</h3>
+                <div class="group group--sparse">
+                  <div class="group__item">
+                    <input type="checkbox" id="eraser">
+                    <label for="eraser">Eraser</label>
+                  </div>
+                  <div class="group__item">
+                    <input type="checkbox" id="clear">
+                    <label for="clear">Clear Canvas</label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="sketch__content">
+            <div class="flex">
+              <button class="btn" type="button">toggle grid lines</button>
+            </div>
+            <div class="canvas__container">
+              <div class="canvas"></div>
+            </div>
+            <div class="flex">
+              <div class="group">
+                <div class="group__item">
+                  <button type="button">-</button>
+                  <input type="text" id="grid_size" value="8">
+                  <label for="grid_size">x 8</label>
+                  <button type="button">+</button>
+                </div>
+              </div>
+              <button class="btn btn--download" type="button">download<span> <i data-feather="download"></i></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

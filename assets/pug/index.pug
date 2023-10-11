@@ -32,3 +32,73 @@ html(lang="en")
                             span.theme__names
                                 span.theme__light Light
                                 span.theme__dark dark
+
+        main
+            .container
+                .sketch
+                    .sketch__sidebar
+                        ul.sketch__menu
+                            li
+                                h3 colors
+                                .colors
+                                    .colors__pen
+                                        input(type="color", id="pen_color")
+                                        label(for="pen_color") Pen Color
+
+                                        ul.colors__recent
+                                            li #[i(data-feather="trash-2")]
+
+                                    .colors__bg
+                                        input(type="color", id="bg_color")
+                                        label(for="bg_color") Canvas Color
+
+                                        ul.colors__recent
+                                            li #[i(data-feather="trash-2")]
+
+                            li
+                                h3 rainbow togglers
+                                .group
+                                    .group__item
+                                        input(type="radio", id="recent", name="rainbow")
+                                        label(for="recent") Recent
+                                    .group__item
+                                        input(type="radio", id="random", name="rainbow")
+                                        label(for="random") Random
+
+                            li
+                                h3 shades
+                                .group
+                                    .group__item
+                                        input(type="radio", id="lighten", name="shading")
+                                        label(for="lighten") lighten
+                                    .group__item
+                                        input(type="radio", id="darken", name="shading")
+                                        label(for="darken") darken
+
+                            li
+                                h3 Erasers
+                                .group.group--sparse
+                                    .group__item
+                                        input(type="checkbox", id="eraser")
+                                        label(for="eraser") Eraser
+                                    .group__item
+                                        input(type="checkbox", id="clear")
+                                        label(for="clear") Clear Canvas
+
+                    .sketch__content
+                        .flex
+                            button.btn(type="button") toggle grid lines
+                        .canvas__container
+                            .canvas
+                        .flex
+                            .group
+                                .group__item
+                                    button(type="button") -
+                                    input(type="text", id="grid_size", value="8")
+                                    label(for="grid_size") x 8
+                                    button(type="button") +
+                            button.btn.btn--download(type="button")
+                                | download
+                                span 
+                                    i(data-feather="download")
+
