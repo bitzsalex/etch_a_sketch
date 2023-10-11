@@ -7,5 +7,52 @@
   --dark-secondary: #5C5470;
   --dark-ternary: #B9B4C7;
   --dark-text: #FAF0E6;
-  --color-link: #25b6f4;
+  --color-link: #55bfec;
+}
+
+/**
+    THIS ARE SASS MIXINS FOR RWD
+    @mixin ===================================*/
+/**
+    THIS ARE SOME BASIC DEFAULT STYLES
+    @mixin ===================================*/
+html {
+  font: 'Open Sans', sans-serif 16px/1.5;
+  box-sizing: border-box;
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  color: var(--light-text);
+  background-color: var(--light-primary);
+}
+
+a {
+  color: var(--color-link);
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/**
+    THIS ARE CUSTOM STYLES
+    @mixin ===================================*/
+/**
+    THIS ARE UTILITY CLASSES
+    @mixin ===================================*/
+.container {
+  max-width: 1260px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
 }
