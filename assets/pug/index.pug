@@ -19,4 +19,16 @@ html(lang="en")
         // loading stylesheet
         link(rel="stylesheet", href="./css/main.css")
     body
-        
+        header.header
+            .container
+                .header__content
+                    .header__logo
+                        a(href="#") Etch a Sketch
+                    .header__themes
+                        button(type="button" class="theme__toggler") 
+                            span.theme__icons
+                                i.theme__sun(data-feather="sun")
+                                i.theme__moon(data-feather="moon")
+                            span.theme__names
+                                span.theme__light Light
+                                span.theme__dark dark

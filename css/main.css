@@ -1,23 +1,20 @@
 :root {
   --light-primary: #fff;
   --light-secondary: #cecece;
-  --light-ternary: #d8dbe0;
+  --light-ternary: #f0f0f0;
   --light-text: #3a3a3a;
   --dark-primary: #352F44;
   --dark-secondary: #5C5470;
-  --dark-ternary: #B9B4C7;
+  --dark-ternary: #52427f;
   --dark-text: #FAF0E6;
   --color-link: #55bfec;
 }
 
 /**
-    THIS ARE SASS MIXINS FOR RWD
-    @mixin ===================================*/
-/**
     THIS ARE SOME BASIC DEFAULT STYLES
     @mixin ===================================*/
 html {
-  font: 'Open Sans', sans-serif 16px/1.5;
+  font: 16px/1.5 "Open Sans", sans-serif;
   box-sizing: border-box;
 }
 
@@ -28,8 +25,19 @@ html {
 }
 
 body {
-  color: var(--light-text);
-  background-color: var(--light-primary);
+  --primary: var(--light-primary);
+  --secondary: var(--light-secondary);
+  --ternary: var(--light-ternary);
+  --text: var(--light-text);
+  color: var(--text);
+  background-color: var(--primary);
+}
+
+body.dark-theme {
+  --primary: var(--dark-primary);
+  --secondary: var(--dark-secondary);
+  --ternary: var(--dark-ternary);
+  --text: var(--dark-text);
 }
 
 a {
@@ -42,6 +50,117 @@ a {
 /**
     THIS ARE CUSTOM STYLES
     @mixin ===================================*/
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--ternary);
+  box-shadow: 0 -2px 4px 0 var(--text);
+}
+
+.header__content {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.theme__toggler {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  position: relative;
+  padding: 12px 25px;
+  align-items: center;
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: capitalize;
+  background-color: var(--ternary);
+}
+
+.theme__icons, .theme__names {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme__names {
+  width: 50px;
+}
+
+.theme__light, .theme__dark, .theme__sun, .theme__moon {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  transform: translateY(-50%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme__sun, .theme__moon {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.theme__sun {
+  transition-delay: .4s;
+  transform: translate(-50%, -50%) scale(1) rotate(360deg);
+}
+
+.theme__dark {
+  top: 150%;
+}
+
+.theme__light {
+  top: 50%;
+}
+
+.theme--dark .theme__light {
+  top: -150%;
+}
+
+.theme--dark .theme__dark {
+  top: 50%;
+}
+
+.theme--dark .theme__sun {
+  transition-delay: 0s;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.theme--dark .theme__moon {
+  transition-delay: .4s;
+  transform: translate(-50%, -50%) scale(1) rotate(360deg);
+}
+
+@keyframes rotateThemeIconToLeft {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg) scale(1);
+  }
+}
+
+@keyframes rotateThemeIconToRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(0);
+  }
+}
+
 /**
     THIS ARE UTILITY CLASSES
     @mixin ===================================*/
