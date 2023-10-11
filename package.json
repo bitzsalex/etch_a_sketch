@@ -1,0 +1,28 @@
+{
+  "name": "etch-a-sketch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:sass": "node-sass -w --output-style expanded ./assets/sass/ -o ./css/",
+    "build:jade": "pug3 -w -P ./assets/pug/ -o ./",
+    "build:dev": "run-p build:sass build:jade"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitzsalex/etch_a_sketch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bitzsalex/etch_a_sketch/issues"
+  },
+  "homepage": "https://github.com/bitzsalex/etch_a_sketch#readme",
+  "devDependencies": {
+    "@tokilabs/pug3-cli": "^3.0.1",
+    "jest": "^29.7.0",
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "pug": "^3.0.2"
+  }
+}
