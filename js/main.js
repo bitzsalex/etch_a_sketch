@@ -42,6 +42,9 @@ if (themeToggler)
 // ==========================
 const DEFAULT_GRID_SIZE = 16
 let globalGridSize
+let rainbowColors
+let shading
+let eraser
 
 // Getting all necessary elements from the DOM
 const canvas = document.querySelector("#canvas")
@@ -52,6 +55,8 @@ const gridSizeIncrementor = document.querySelector("button#grid_size_inc")
 const gridSizeDecrementor = document.querySelector("button#grid_size_dec")
 const gridLinesToggler = document.querySelector("#grid-lines")
 const clearGrid = document.querySelector("#clear")
+const radioButtons = document.querySelectorAll("input[type='radio']")
+
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -191,10 +196,47 @@ setInitialGridSize()
 setInitialGridLines()
 
 
-// let radioButtons = document.querySelectorAll("input[type='radio']")
-// console.log(radioButtons)
-// radioButtons.forEach(radioButton => {
-//     radioButton.addEventListener("change", () => {
-//         console.log(radioButton.checked)
-//     }) 
-// });
+radioButtons.forEach(radioButton => {
+    radioButton.addEventListener("click", event => {
+        radioButtons.forEach(innerButton => {
+            if (radioButton !== innerButton) innerButton.checked = false
+        })
+
+        switch(radioButton.name) {
+            case "shading":
+                // Before checking the value, reset the other options
+                eraser = rainbowColors = ""
+
+                if (shading === radioButton.value) {
+                    radioButton.checked = false
+                    shading = ""
+                } else {
+                    shading = radioButton.value
+                    console.log("call the shading function")
+                }
+                break
+            case "rainbow":
+                eraser = shading = ""
+
+                if (rainbowColors === radioButton.value) {
+                    radioButton.checked = false
+                    rainbowColors = ""
+                } else {
+                    rainbowColors = radioButton.value
+                    console.log("call the rainbow function")
+                }
+                break
+            case "eraser":
+                shading = rainbowColors = ""
+                
+                if (eraser === radioButton.value) {
+                    radioButton.checked = false
+                    eraser = ""
+                } else {
+                    eraser = radioButton.value
+                    console.log("call the erase function")
+                }
+                break
+        }
+    })
+});

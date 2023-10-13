@@ -61,30 +61,30 @@ html(lang="en")
                                 h3 rainbow togglers
                                 .group
                                     .group__item
-                                        input(type="radio", id="recent", name="rainbow")
+                                        input(type="radio", id="recent", name="rainbow", value="recent")
                                         label(for="recent") Recent
                                     .group__item
-                                        input(type="radio", id="random", name="rainbow")
+                                        input(type="radio", id="random", name="rainbow", value="random")
                                         label(for="random") Random
 
                             li
                                 h3 shades
                                 .group
                                     .group__item
-                                        input(type="radio", id="lighten", name="shading")
+                                        input(type="radio", id="lighten", name="shading", value="lighten")
                                         label(for="lighten") lighten
                                     .group__item
-                                        input(type="radio", id="darken", name="shading")
+                                        input(type="radio", id="darken", name="shading", value="darken")
                                         label(for="darken") darken
 
                             li
                                 h3 Erasers
                                 .group
                                     .group__item
-                                        input(type="checkbox", id="eraser")
-                                        label(for="eraser") Eraser
+                                        input(type="radio", name="eraser", id="eraser", value="erase")
+                                        label.btn--l-radius(for="eraser") Eraser
                                     .group__item
-                                        button.btn#clear(type="button") Clear Canvas
+                                        button.btn.btn--r-radius#clear(type="button") Clear Canvas
 
                     .sketch__content.flex.flex--column
                         .flex.flex--end
