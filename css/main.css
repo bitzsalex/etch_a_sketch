@@ -179,6 +179,71 @@ main {
   background-color: var(--ternary);
 }
 
+.colors {
+  gap: 10px;
+}
+
+.colors > .flex {
+  gap: 6px;
+}
+
+.colors__recent li {
+  color: red;
+  width: 40px;
+  height: 40px;
+  background-color: currentColor;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.colors__recent li:hover .colors__icon {
+  visibility: visible;
+  opacity: 1;
+}
+
+.colors__recent li:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.colors__recent li::before {
+  content: '';
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  display: inline-block;
+  border-radius: 50%;
+  border: 4px solid var(--primary);
+}
+
+.colors__icon {
+  color: var(--text);
+  position: absolute;
+  background-color: var(--primary);
+  border-radius: 4px;
+  padding: 4px;
+  top: 0px;
+  right: -10px;
+  transition: all .5s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.colors input[type="color"] {
+  outline: none;
+  border: none;
+  width: 80px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 2px;
+  background-color: transparent;
+  display: inline-block;
+  -webkit-appearance: none;
+}
+
 .canvas {
   width: 680px;
   height: 680px;

@@ -40,20 +40,30 @@ html(lang="en")
                         ul.sketch__menu
                             li
                                 h3 colors
-                                .colors
-                                    .colors__pen
-                                        input(type="color", id="pen_color")
-                                        label(for="pen_color") Pen Color
+                                .colors.flex.flex--column
+                                    .flex.flex--column
+                                        .flex.flex--items-center
+                                            input(type="color", id="pen_color")
+                                            label(for="pen_color") Pen Color
 
-                                        ul.colors__recent
-                                            li #[i(data-feather="trash-2")]
+                                        ul.colors__recent.flex.flex-items-center
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
 
-                                    .colors__bg
-                                        input(type="color", id="bg_color")
-                                        label(for="bg_color") Canvas Color
+                                    .flex.flex--column
+                                        .flex.flex--items-center
+                                            input(type="color", id="bg_color")
+                                            label(for="bg_color") Background Color
 
-                                        ul.colors__recent
-                                            li #[i(data-feather="trash-2")]
+                                        ul.colors__recent.flex.flex-items-center
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
+                                            li #[i.colors__icon(data-feather="trash-2")]
 
                             li
                                 h3 rainbow togglers
