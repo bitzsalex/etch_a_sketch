@@ -253,6 +253,10 @@ main {
   background-color: var(--primary);
 }
 
+.canvas > div {
+  flex: 1 1 auto;
+}
+
 .group {
   background-color: var(--secondary);
   display: inline-flex;
