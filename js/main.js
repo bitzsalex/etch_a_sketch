@@ -191,52 +191,56 @@ clearGrid.addEventListener("click", () => {
     }, 500)
 })
 
-// initializing the grids
-setInitialGridSize()
-setInitialGridLines()
+const resetAllRadioButtonsExcept = radioButton => {
+    radioButtons.forEach(iteratorRadioButton => {
+        if (radioButton !== iteratorRadioButton)
+            iteratorRadioButton.checked = false
+    })
+}
 
+const checkAndGetRadioButtonValues = (variable, radioButton) => {
+    if (variable === radioButton.value) {
+        radioButton.checked = false
+        return ""
+    }
+
+    return radioButton.value
+}
 
 radioButtons.forEach(radioButton => {
     radioButton.addEventListener("click", event => {
-        radioButtons.forEach(innerButton => {
-            if (radioButton !== innerButton) innerButton.checked = false
-        })
+        resetAllRadioButtonsExcept(radioButton)
 
         switch(radioButton.name) {
             case "shading":
                 // Before checking the value, reset the other options
                 eraser = rainbowColors = ""
+                shading = checkAndGetRadioButtonValues(shading, radioButton)
 
-                if (shading === radioButton.value) {
-                    radioButton.checked = false
-                    shading = ""
-                } else {
-                    shading = radioButton.value
-                    console.log("call the shading function")
+                if (shading) {
+                    console.log("call shading function")
                 }
                 break
             case "rainbow":
                 eraser = shading = ""
+                rainbowColors = checkAndGetRadioButtonValues(rainbowColors, radioButton)
 
-                if (rainbowColors === radioButton.value) {
-                    radioButton.checked = false
-                    rainbowColors = ""
-                } else {
-                    rainbowColors = radioButton.value
+                if (rainbowColors) {
                     console.log("call the rainbow function")
                 }
                 break
             case "eraser":
                 shading = rainbowColors = ""
-                
-                if (eraser === radioButton.value) {
-                    radioButton.checked = false
-                    eraser = ""
-                } else {
-                    eraser = radioButton.value
+                eraser = checkAndGetRadioButtonValues(eraser, radioButton)
+
+                if (eraser) {
                     console.log("call the erase function")
                 }
                 break
         }
     })
 });
+
+// initializing the grids
+setInitialGridSize()
+setInitialGridLines()
