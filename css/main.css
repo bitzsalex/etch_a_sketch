@@ -71,6 +71,7 @@ ul {
 
 input {
   color: currentColor;
+  font: inherit;
 }
 
 /**
@@ -419,7 +420,7 @@ main {
 
 .error {
   font-size: .8em;
-  color: crimson;
+  color: tomato;
   font-style: italic;
   margin-top: 6px;
 }

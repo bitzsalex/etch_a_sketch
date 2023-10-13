@@ -47,6 +47,8 @@ const canvas = document.querySelector("#canvas")
 const gridSizeInput = document.querySelector("#grid_size")
 const gridSizeLabel = document.querySelector("label[for='grid_size']")
 const gridSizeForm = document.querySelector("div.canvas__grid")
+const gridSizeIncrementor = document.querySelector("button#grid_size_inc")
+const gridSizeDecrementor = document.querySelector("button#grid_size_dec")
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -55,8 +57,7 @@ const createGridElement = width => {
 }
 
 const generateGrids = size => {
-    // before generating any grid
-    // empty the canvas first
+    // before generating any grid empty the canvas first
     canvas.innerHTML = ""
 
     let maxWidth = 100 / size
@@ -67,12 +68,15 @@ const generateGrids = size => {
     }
 }
 
-const setInitialGridSize = () => {
-    let gridSize = localStorage.getItem("gridSize") || DEFAULT_GRID_SIZE
-    
+const updateDOM = gridSize => {
     gridSizeInput.value = gridSize
     gridSizeLabel.textContent = "X " + gridSize
     generateGrids(gridSize)
+}
+
+const setInitialGridSize = () => {
+    let gridSize = localStorage.getItem("gridSize") || DEFAULT_GRID_SIZE
+    updateDOM(gridSize)
 }
 
 const validateGridSizeInput = value => {
@@ -101,7 +105,7 @@ const removeErrorMessage = parent => {
 }
 
 gridSizeInput.addEventListener("keyup", () => {
-    let value = gridSizeInput.value
+    let value = Number(gridSizeInput.value)
 
     if (!validateGridSizeInput(value)) {
         showErrorMessage(
@@ -109,9 +113,48 @@ gridSizeInput.addEventListener("keyup", () => {
             "Grid size must be a number between 2 and 70, inclusively."
         )
     } else {
-        gridSizeLabel.textContent = "X " + value
-        generateGrids(value)
+        updateDOM(value)
         removeErrorMessage(gridSizeForm)
+    }
+})
+
+gridSizeIncrementor.addEventListener("click", () => {
+    let value = Number(gridSizeInput.value)
+
+    if (!validateGridSizeInput(value)) {
+        showErrorMessage(
+            gridSizeForm,
+            "Whether the value isn't a number or out of the range 2 and 70."
+        )
+    } else if (value != 70) {
+        updateDOM(value + 1)
+        removeErrorMessage(gridSizeForm)
+        
+        // disable the button from consecutive multiple clicks
+        gridSizeIncrementor.setAttribute("disabled", true)
+        setTimeout(() => {
+            gridSizeIncrementor.removeAttribute("disabled")
+        }, 300);
+    }
+})
+
+gridSizeDecrementor.addEventListener("click", () => {
+    let value = Number(gridSizeInput.value)
+
+    if (!validateGridSizeInput(value)) {
+        showErrorMessage(
+            gridSizeForm,
+            "Whether the value isn't a number or out of the range 2 and 70."
+        )
+    } else if (value != 2) {
+        updateDOM(value - 1)
+        removeErrorMessage(gridSizeForm)
+
+        // disable the button from consecutive multiple clicks
+        gridSizeDecrementor.setAttribute("disabled", true)
+        setTimeout(() => {
+            gridSizeDecrementor.removeAttribute("disabled")
+        }, 300);
     }
 })
 
