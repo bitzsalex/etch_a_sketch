@@ -68,22 +68,20 @@ a
     text-decoration: none
     cursor: pointer
 
+ul
+    list-style-type: none
+
 
 /**
     THIS ARE CUSTOM STYLES
     ====================================*/
 .header
     width: 100%
-    display: flex
-    align-items: center
     border-bottom: 1px solid var(--ternary)
     box-shadow: 0 -2px 4px 0 var(--text)
 
     &__content
         height: 80px
-        display: flex
-        justify-content: space-between
-        align-items: center
 
     &__logo
         font-size: 36px
@@ -94,13 +92,11 @@ a
         -webkit-appearance: none
         border: none
         outline: none
-        display: flex
         gap: 10px
         color: currentColor
         font-size: 20px
         position: relative
         padding: 12px 25px
-        align-items: center
         border-radius: 30px
         cursor: pointer
         text-transform: capitalize
@@ -132,9 +128,6 @@ a
         left: 0
         top: 0
         position: absolute
-        display: flex
-        justify-content: center
-        align-items: center
         transition: all .5s cubic-bezier(0.4, 0, 0.2, 1)
 
     &__sun
@@ -150,19 +143,38 @@ a
     &__light
         top: 50%
 
+main
+    padding-top: 30px
 
+.sketch
+    padding: 50px 0px
 
-@keyframes rotateThemeIconToLeft
-    0%
-        transform: translate(-50%, -50%) rotate(0deg) scale(0)
-    100%
-        transform: translate(-50%, -50%) rotate(-360deg) scale(1)
+    &__sidebar
+        width: 240px
 
-@keyframes rotateThemeIconToRight
-    0%
-        transform: translate(-50%, -50%) rotate(0deg) scale(1)
-    100%
-        transform: translate(-50%, -50%) rotate(360deg) scale(0)
+    &__menu
+        & > li
+            margin-bottom: 20px
+
+        h3
+            text-transform: capitalize
+            padding: 10px 0px
+            font-weight: 700
+            border-bottom: 1px solid var(--ternary)
+            margin-bottom: 10px
+
+    &__content
+        width: 720px
+        gap: 20px
+        padding: 20px 20px
+        border-radius: 10px
+        background-color: var(--ternary)
+
+.canvas
+    width: 680px
+    height: 680px 
+    background-color: var(--primary)
+
 
 /**
     THIS ARE UTILITY CLASSES
@@ -174,3 +186,27 @@ a
 
     @include breakpoint(sm)
         padding: 0 16px
+
+.flex
+    display: flex
+
+    &--column
+        flex-direction: column
+
+    &--end
+        justify-content: flex-end
+
+    &--evenly
+        justify-content: space-evenly
+    
+    &--between
+        justify-content: space-between
+
+    &--center
+        justify-content: center
+
+    &--items-start
+        align-items: flex-start
+
+    &--items-center
+        align-items: center

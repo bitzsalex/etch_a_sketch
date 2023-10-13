@@ -19,23 +19,23 @@ html(lang="en")
         // loading stylesheet
         link(rel="stylesheet", href="./css/main.css")
     body
-        header.header
+        header.header.flex.flex--items-center
             .container
-                .header__content
+                .header__content.flex.flex--items-center.flex--between
                     .header__logo
                         a(href="#") Etch a Sketch
                     .header__themes
-                        button(type="button" class="theme__toggler") 
+                        button(type="button" class="theme__toggler flex flex--items-center") 
                             span.theme__icons
-                                i.theme__sun(data-feather="sun")
-                                i.theme__moon(data-feather="moon")
+                                i.theme__sun.flex.flex--items-center.flex--center(data-feather="sun")
+                                i.theme__moon.flex.flex--items-center.flex--center(data-feather="moon")
                             span.theme__names
                                 span.theme__light Light
                                 span.theme__dark dark
 
         main
             .container
-                .sketch
+                .sketch.flex.flex--evenly.flex--items-start
                     .sketch__sidebar
                         ul.sketch__menu
                             li
@@ -82,15 +82,14 @@ html(lang="en")
                                         input(type="checkbox", id="eraser")
                                         label(for="eraser") Eraser
                                     .group__item
-                                        input(type="checkbox", id="clear")
-                                        label(for="clear") Clear Canvas
+                                        button(type="button") Clear Canvas
 
-                    .sketch__content
-                        .flex
+                    .sketch__content.flex.flex--column
+                        .flex.flex--end
                             button.btn(type="button") toggle grid lines
-                        .canvas__container
-                            .canvas
-                        .flex
+                        .canvas
+
+                        .flex.flex--between
                             .group
                                 .group__item
                                     button(type="button") -

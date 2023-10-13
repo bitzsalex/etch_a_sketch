@@ -64,22 +64,21 @@ a {
   cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /**
     THIS ARE CUSTOM STYLES
     @mixin ===================================*/
 .header {
   width: 100%;
-  display: flex;
-  align-items: center;
   border-bottom: 1px solid var(--ternary);
   box-shadow: 0 -2px 4px 0 var(--text);
 }
 
 .header__content {
   height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .header__logo {
@@ -91,13 +90,11 @@ a {
   -webkit-appearance: none;
   border: none;
   outline: none;
-  display: flex;
   gap: 10px;
   color: currentColor;
   font-size: 20px;
   position: relative;
   padding: 12px 25px;
-  align-items: center;
   border-radius: 30px;
   cursor: pointer;
   text-transform: capitalize;
@@ -130,9 +127,6 @@ a {
   left: 0;
   top: 0;
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -153,22 +147,42 @@ a {
   top: 50%;
 }
 
-@keyframes rotateThemeIconToLeft {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) scale(0);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-360deg) scale(1);
-  }
+main {
+  padding-top: 30px;
 }
 
-@keyframes rotateThemeIconToRight {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg) scale(0);
-  }
+.sketch {
+  padding: 50px 0px;
+}
+
+.sketch__sidebar {
+  width: 240px;
+}
+
+.sketch__menu > li {
+  margin-bottom: 20px;
+}
+
+.sketch__menu h3 {
+  text-transform: capitalize;
+  padding: 10px 0px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--ternary);
+  margin-bottom: 10px;
+}
+
+.sketch__content {
+  width: 720px;
+  gap: 20px;
+  padding: 20px 20px;
+  border-radius: 10px;
+  background-color: var(--ternary);
+}
+
+.canvas {
+  width: 680px;
+  height: 680px;
+  background-color: var(--primary);
 }
 
 /**
@@ -184,4 +198,36 @@ a {
   .container {
     padding: 0 16px;
   }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--end {
+  justify-content: flex-end;
+}
+
+.flex--evenly {
+  justify-content: space-evenly;
+}
+
+.flex--between {
+  justify-content: space-between;
+}
+
+.flex--center {
+  justify-content: center;
+}
+
+.flex--items-start {
+  align-items: flex-start;
+}
+
+.flex--items-center {
+  align-items: center;
 }

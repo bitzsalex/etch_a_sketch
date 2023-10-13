@@ -16,19 +16,19 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <header class="header">
+    <header class="header flex flex--items-center">
       <div class="container">
-        <div class="header__content">
+        <div class="header__content flex flex--items-center flex--between">
           <div class="header__logo"><a href="#">Etch a Sketch</a></div>
           <div class="header__themes">
-            <button class="theme__toggler" type="button"> <span class="theme__icons"><i class="theme__sun" data-feather="sun"></i><i class="theme__moon" data-feather="moon"></i></span><span class="theme__names"><span class="theme__light">Light</span><span class="theme__dark">dark</span></span></button>
+            <button class="theme__toggler flex flex--items-center" type="button"> <span class="theme__icons"><i class="theme__sun flex flex--items-center flex--center" data-feather="sun"></i><i class="theme__moon flex flex--items-center flex--center" data-feather="moon"></i></span><span class="theme__names"><span class="theme__light">Light</span><span class="theme__dark">dark</span></span></button>
           </div>
         </div>
       </div>
     </header>
     <main>
       <div class="container">
-        <div class="sketch">
+        <div class="sketch flex flex--evenly flex--items-start">
           <div class="sketch__sidebar">
             <ul class="sketch__menu">
               <li>
@@ -84,21 +84,18 @@
                     <label for="eraser">Eraser</label>
                   </div>
                   <div class="group__item">
-                    <input type="checkbox" id="clear">
-                    <label for="clear">Clear Canvas</label>
+                    <button type="button">Clear Canvas</button>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <div class="sketch__content">
-            <div class="flex">
+          <div class="sketch__content flex flex--column">
+            <div class="flex flex--end">
               <button class="btn" type="button">toggle grid lines</button>
             </div>
-            <div class="canvas__container">
-              <div class="canvas"></div>
-            </div>
-            <div class="flex">
+            <div class="canvas"></div>
+            <div class="flex flex--between">
               <div class="group">
                 <div class="group__item">
                   <button type="button">-</button>
