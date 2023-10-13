@@ -182,7 +182,8 @@ main
 
     &__recent
         li
-            color: red
+            // will be set according to the choice using js
+            // color: red
             width: 40px
             height: 40px
             background-color: currentColor
@@ -237,6 +238,11 @@ main
     width: 600px
     height: 600px 
     background-color: var(--primary)
+
+    // will add it when I apply grid line toggler
+    // &--grid-lines
+    //     & > div
+    //         border: 1px solid var(--ternary)
 
 .group
     background-color: var(--secondary)
@@ -356,3 +362,9 @@ main
 
     &--items-center
         align-items: center
+
+    &--items-stretch
+        align-items: stretch
+
+    &--wrap
+        flex-wrap: wrap

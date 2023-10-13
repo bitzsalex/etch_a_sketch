@@ -1,24 +1,20 @@
 feather.replace()
 
+// getting themeToggler button
 const themeToggler = document.querySelector("button.theme__toggler")
 
 const changeTheme = theme => {
-    if (theme === "dark") {
-        document.body.classList.add("dark-theme")
-        localStorage.setItem("theme", "dark")
-    } else {
-        document.body.classList.remove("dark-theme")
-        localStorage.setItem("theme", "light")
-    }
+    if (theme === "dark") document.body.classList.add("dark-theme")
+    else document.body.classList.remove("dark-theme")
 }
 
 const toggleTheme = () => {
     if (document.body.classList.contains("dark-theme")) {
         changeTheme("light")
-        themeToggler.classList.remove("theme--dark")
+        localStorage.setItem("theme", "light")
     } else {
         changeTheme("dark")
-        themeToggler.classList.add("theme--dark")
+        localStorage.setItem("theme", "dark")
     }
 }
 
@@ -35,6 +31,7 @@ const setTheme = () => {
     }
 }
 
+// setting the initial theme
 setTheme()
 
 if (themeToggler)
