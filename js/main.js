@@ -38,7 +38,7 @@ if (themeToggler)
     themeToggler.addEventListener("click", toggleTheme)
 
 
-// GRID ITEMS GENERATING CODE
+// GRID CODE
 // ==========================
 const DEFAULT_GRID_SIZE = 16
 
@@ -49,6 +49,7 @@ const gridSizeLabel = document.querySelector("label[for='grid_size']")
 const gridSizeForm = document.querySelector("div.canvas__grid")
 const gridSizeIncrementor = document.querySelector("button#grid_size_inc")
 const gridSizeDecrementor = document.querySelector("button#grid_size_dec")
+const gridLinesToggler = document.querySelector("#grid-lines")
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -158,5 +159,30 @@ gridSizeDecrementor.addEventListener("click", () => {
     }
 })
 
+const setInitialGridLines = () => {
+    if (localStorage.getItem("gridLines"))
+        canvas.classList.add("canvas--grid-lines")
+}
+
+gridLinesToggler.addEventListener("change", () => {
+    if (gridLinesToggler.checked) {
+        canvas.classList.add("canvas--grid-lines")
+        localStorage.setItem("gridLines", true)
+    } else {
+        canvas.classList.remove("canvas--grid-lines")
+        localStorage.removeItem("gridLines")
+    }
+})
+
 // initializing the grids
 setInitialGridSize()
+setInitialGridLines()
+
+
+// let radioButtons = document.querySelectorAll("input[type='radio']")
+// console.log(radioButtons)
+// radioButtons.forEach(radioButton => {
+//     radioButton.addEventListener("change", () => {
+//         console.log(radioButton.checked)
+//     }) 
+// });

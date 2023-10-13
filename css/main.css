@@ -258,6 +258,10 @@ main {
   flex: 1 1 auto;
 }
 
+.canvas--grid-lines > div {
+  border: 1px solid var(--ternary);
+}
+
 .group {
   background-color: var(--secondary);
   display: inline-flex;
@@ -352,7 +356,7 @@ main {
 }
 
 .btn--download span:last-child svg {
-  height: 17px;
+  height: 16px;
 }
 
 .btn--l-radius {
