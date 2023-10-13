@@ -264,6 +264,7 @@ main {
   padding: 8px 10px;
   align-items: stretch;
   text-transform: capitalize;
+  align-self: flex-start;
 }
 
 .group--np {
@@ -337,7 +338,6 @@ main {
 
 .btn--download {
   padding: 0;
-  align-self: center;
 }
 
 .btn--download span {
@@ -352,6 +352,14 @@ main {
 
 .btn--download span:last-child svg {
   height: 17px;
+}
+
+.btn--l-radius {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.btn--r-radius {
+  border-radius: 0px 4px 4px 0px;
 }
 
 /**
@@ -407,4 +415,11 @@ main {
 
 .flex--wrap {
   flex-wrap: wrap;
+}
+
+.error {
+  font-size: .8em;
+  color: crimson;
+  font-style: italic;
+  margin-top: 6px;
 }

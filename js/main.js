@@ -46,6 +46,7 @@ const DEFAULT_GRID_SIZE = 16
 const canvas = document.querySelector("#canvas")
 const gridSizeInput = document.querySelector("#grid_size")
 const gridSizeLabel = document.querySelector("label[for='grid_size']")
+const gridSizeForm = document.querySelector("div.canvas__grid")
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -54,6 +55,10 @@ const createGridElement = width => {
 }
 
 const generateGrids = size => {
+    // before generating any grid
+    // empty the canvas first
+    canvas.innerHTML = ""
+
     let maxWidth = 100 / size
 
     for (itr = 1; itr <= size ** 2; itr++) {
@@ -70,8 +75,45 @@ const setInitialGridSize = () => {
     generateGrids(gridSize)
 }
 
-// gridSizeInput.addEventListener("keyup", () => {
-//     console.log("the value has been updated")
-// })
+const validateGridSizeInput = value => {
+    if (isNaN(value)) return false
+    else if (2 > value || value > 70) return false
+    return true
+}
 
+const showErrorMessage = (parent, message) => {
+    let errorMessage = parent.querySelector(".error")
+    
+    if (!errorMessage) {
+        errorMessage = document.createElement("p")
+        errorMessage.classList.add("error")
+        parent.appendChild(errorMessage)
+    }
+
+    errorMessage.textContent = message
+}
+
+const removeErrorMessage = parent => {
+    let errorMessage = parent.querySelector(".error")
+
+    if (errorMessage)
+        parent.removeChild(errorMessage)
+}
+
+gridSizeInput.addEventListener("keyup", () => {
+    let value = gridSizeInput.value
+
+    if (!validateGridSizeInput(value)) {
+        showErrorMessage(
+            gridSizeForm,
+            "Grid size must be a number between 2 and 70, inclusively."
+        )
+    } else {
+        gridSizeLabel.textContent = "X " + value
+        generateGrids(value)
+        removeErrorMessage(gridSizeForm)
+    }
+})
+
+// initializing the grids
 setInitialGridSize()

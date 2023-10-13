@@ -100,13 +100,15 @@
               </div>
             </div>
             <div class="canvas flex flex--wrap flex-items-stretch" id="canvas"></div>
-            <div class="flex flex--between">
-              <div class="group">
-                <div class="group__item">
-                  <button class="btn" type="button">-</button>
-                  <input type="text" id="grid_size" value="8">
-                  <label for="grid_size">x 8</label>
-                  <button class="btn" type="button">+</button>
+            <div class="flex flex--between flex--items-start">
+              <div class="canvas__grid flex flex--column">
+                <div class="group group--np">
+                  <div class="group__item">
+                    <button class="btn btn--l-radius" type="button">-</button>
+                    <input type="text" id="grid_size" value="8">
+                    <label for="grid_size">x 8</label>
+                    <button class="btn btn--r-radius" type="button">+</button>
+                  </div>
                 </div>
               </div>
               <button class="btn btn--download" type="button"><span>download</span><span><i data-feather="download"></i></span></button>

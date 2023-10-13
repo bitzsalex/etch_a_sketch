@@ -94,13 +94,15 @@ html(lang="en")
                                     label(for="grid-lines") toggle grid lines
                         .canvas.flex.flex--wrap.flex-items-stretch#canvas
 
-                        .flex.flex--between
-                            .group
-                                .group__item
-                                    button.btn(type="button") -
-                                    input(type="text", id="grid_size", value="8")
-                                    label(for="grid_size") x 8
-                                    button.btn(type="button") +
+                        .flex.flex--between.flex--items-start
+                            .canvas__grid.flex.flex--column
+                                .group.group--np
+                                    .group__item
+                                        button.btn.btn--l-radius(type="button") -
+                                        input(type="text", id="grid_size", value="8")
+                                        label(for="grid_size") x 8
+                                        button.btn.btn--r-radius(type="button") +
+                                
                             button.btn.btn--download(type="button")
                                 span download
                                 span

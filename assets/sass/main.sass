@@ -254,6 +254,7 @@ main
     padding: 8px 10px
     align-items: stretch
     text-transform: capitalize
+    align-self: flex-start
 
     &--np
         padding: 0
@@ -294,7 +295,7 @@ main
 
         button
             padding-top: 0
-            padding-bottom: 0 
+            padding-bottom: 0
 
 .btn
     -webkit-appearance: none
@@ -317,7 +318,6 @@ main
 
     &--download
         padding: 0
-        align-self: center
 
         span
             padding: 10px 16px
@@ -329,6 +329,12 @@ main
 
             svg
                 height: 17px
+
+    &--l-radius
+        border-radius: 4px 0px 0px 4px
+
+    &--r-radius
+        border-radius: 0px 4px 4px 0px
 
 
 /**
@@ -371,3 +377,9 @@ main
 
     &--wrap
         flex-wrap: wrap
+
+.error
+    font-size: .8em
+    color: crimson
+    font-style: italic
+    margin-top: 6px
