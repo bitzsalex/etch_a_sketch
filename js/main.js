@@ -73,6 +73,7 @@ const updateDOM = gridSize => {
     gridSizeInput.value = gridSize
     gridSizeLabel.textContent = "X " + gridSize
     generateGrids(gridSize)
+    localStorage.setItem("gridSize", gridSize)
 }
 
 const setInitialGridSize = () => {
