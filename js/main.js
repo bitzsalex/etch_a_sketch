@@ -41,6 +41,7 @@ if (themeToggler)
 // GRID CODE
 // ==========================
 const DEFAULT_GRID_SIZE = 16
+let globalGridSize
 
 // Getting all necessary elements from the DOM
 const canvas = document.querySelector("#canvas")
@@ -50,6 +51,7 @@ const gridSizeForm = document.querySelector("div.canvas__grid")
 const gridSizeIncrementor = document.querySelector("button#grid_size_inc")
 const gridSizeDecrementor = document.querySelector("button#grid_size_dec")
 const gridLinesToggler = document.querySelector("#grid-lines")
+const clearGrid = document.querySelector("#clear")
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -70,6 +72,7 @@ const generateGrids = size => {
 }
 
 const updateDOM = gridSize => {
+    globalGridSize = gridSize
     gridSizeInput.value = gridSize
     gridSizeLabel.textContent = "X " + gridSize
     generateGrids(gridSize)
@@ -77,8 +80,8 @@ const updateDOM = gridSize => {
 }
 
 const setInitialGridSize = () => {
-    let gridSize = localStorage.getItem("gridSize") || DEFAULT_GRID_SIZE
-    updateDOM(gridSize)
+    globalGridSize = localStorage.getItem("gridSize") || DEFAULT_GRID_SIZE
+    updateDOM(globalGridSize)
 }
 
 const validateGridSizeInput = value => {
@@ -173,6 +176,14 @@ gridLinesToggler.addEventListener("change", () => {
         canvas.classList.remove("canvas--grid-lines")
         localStorage.removeItem("gridLines")
     }
+})
+
+clearGrid.addEventListener("click", () => {
+    canvas.classList.add("shake")
+    setTimeout(() => {
+        generateGrids(globalGridSize)
+        canvas.classList.remove("shake")
+    }, 500)
 })
 
 // initializing the grids
