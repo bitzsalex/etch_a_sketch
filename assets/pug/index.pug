@@ -87,27 +87,30 @@ html(lang="en")
 
                             li
                                 h3 Erasers
-                                .group.group--sparse
+                                .group
                                     .group__item
                                         input(type="checkbox", id="eraser")
                                         label(for="eraser") Eraser
                                     .group__item
-                                        button(type="button") Clear Canvas
+                                        button.btn(type="button") Clear Canvas
 
                     .sketch__content.flex.flex--column
                         .flex.flex--end
-                            button.btn(type="button") toggle grid lines
+                            .group.group--np
+                                .group__item
+                                    input(type="checkbox", id="grid-lines")
+                                    label(for="grid-lines") toggle grid lines
                         .canvas
 
                         .flex.flex--between
                             .group
                                 .group__item
-                                    button(type="button") -
+                                    button.btn(type="button") -
                                     input(type="text", id="grid_size", value="8")
                                     label(for="grid_size") x 8
-                                    button(type="button") +
+                                    button.btn(type="button") +
                             button.btn.btn--download(type="button")
-                                | download
-                                span 
+                                span download
+                                span
                                     i(data-feather="download")
 

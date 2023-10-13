@@ -90,13 +90,13 @@
               </li>
               <li>
                 <h3>Erasers</h3>
-                <div class="group group--sparse">
+                <div class="group">
                   <div class="group__item">
                     <input type="checkbox" id="eraser">
                     <label for="eraser">Eraser</label>
                   </div>
                   <div class="group__item">
-                    <button type="button">Clear Canvas</button>
+                    <button class="btn" type="button">Clear Canvas</button>
                   </div>
                 </div>
               </li>
@@ -104,19 +104,24 @@
           </div>
           <div class="sketch__content flex flex--column">
             <div class="flex flex--end">
-              <button class="btn" type="button">toggle grid lines</button>
+              <div class="group group--np">
+                <div class="group__item">
+                  <input type="checkbox" id="grid-lines">
+                  <label for="grid-lines">toggle grid lines</label>
+                </div>
+              </div>
             </div>
             <div class="canvas"></div>
             <div class="flex flex--between">
               <div class="group">
                 <div class="group__item">
-                  <button type="button">-</button>
+                  <button class="btn" type="button">-</button>
                   <input type="text" id="grid_size" value="8">
                   <label for="grid_size">x 8</label>
-                  <button type="button">+</button>
+                  <button class="btn" type="button">+</button>
                 </div>
               </div>
-              <button class="btn btn--download" type="button">download<span> <i data-feather="download"></i></span></button>
+              <button class="btn btn--download" type="button"><span>download</span><span><i data-feather="download"></i></span></button>
             </div>
           </div>
         </div>

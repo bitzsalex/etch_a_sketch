@@ -8,6 +8,7 @@
     --dark-ternary: #3f345f
     --dark-text: #FAF0E6
     --color-link: #55bfec
+    --color-button: #0a597a
 
 //
 //    THIS ARE SASS MIXINS FOR RWD
@@ -70,6 +71,9 @@ a
 
 ul
     list-style-type: none
+
+input
+    color: currentColor
 
 
 /**
@@ -154,17 +158,16 @@ main
 
     &__menu
         & > li
-            margin-bottom: 20px
+            margin-bottom: 30px
 
         h3
             text-transform: capitalize
             padding: 10px 0px
-            font-weight: 700
             border-bottom: 1px solid var(--ternary)
-            margin-bottom: 10px
+            margin-bottom: 6px
 
     &__content
-        width: 720px
+        width: 640px
         gap: 20px
         padding: 20px 20px
         border-radius: 10px
@@ -231,9 +234,87 @@ main
         -webkit-appearance: none
 
 .canvas
-    width: 680px
-    height: 680px 
+    width: 600px
+    height: 600px 
     background-color: var(--primary)
+
+.group
+    background-color: var(--secondary)
+    display: inline-flex
+    border-radius: 4px
+    padding: 8px 10px
+    align-items: stretch
+    text-transform: capitalize
+
+    &--np
+        padding: 0
+
+    &__item
+        display: flex
+
+        input[type="radio"],
+        input[type="checkbox"]
+            width: 0
+            height: 0px
+            visibility: hidden
+            opacity: 0
+
+        label
+            padding: 8px 10px
+            cursor: pointer
+            border-radius: 4px
+
+        input[type="radio"]:checked + label,
+        input[type="checkbox"]:checked + label
+            color: #fff
+            background-color: var(--color-link)
+
+        input[type="text"]
+            -webkit-appearance: none
+            outline: none
+            border: none
+            width: 40px
+            font-size: 16px
+            padding: 0px 8px
+            background-color: transparent
+
+        button
+            padding-top: 0
+            padding-bottom: 0 
+
+.btn
+    -webkit-appearance: none
+    padding: 10px 16px
+    border: none
+    font-size: 16px
+    outline: none
+    display: inline-flex
+    align-items: center
+    background-color: var(--color-button)
+    border-radius: 4px
+    text-transform: capitalize
+    color: #fff
+    cursor: pointer
+    min-height: 40px
+    transition: all .5s ease-in-out
+
+    &:hover
+        background-color: #1086b9
+
+    &--download
+        padding: 0
+        align-self: center
+
+        span
+            padding: 10px 16px
+        
+        span:last-child
+            padding: 10px
+            background-color: rgba(255, 255, 255, .4)
+            border-radius: 0px 4px 4px 0px
+
+            svg
+                height: 17px
 
 
 /**
