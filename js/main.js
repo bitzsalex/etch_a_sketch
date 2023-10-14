@@ -1,11 +1,14 @@
 feather.replace()
 
+let currentTheme
+
 // getting themeToggler button
 const themeToggler = document.querySelector("button.theme__toggler")
 
 const changeTheme = theme => {
     if (theme === "dark") document.body.classList.add("dark-theme")
     else document.body.classList.remove("dark-theme")
+    currentTheme = theme
 }
 
 const toggleTheme = () => {
@@ -41,10 +44,14 @@ if (themeToggler)
 // GRID CODE
 // ==========================
 const DEFAULT_GRID_SIZE = 16
+// const DEFAULT_PEN_COLOR = "rgb(131, 137, 150)"
+const DEFAULT_PEN_COLOR = "#838996"
 let globalGridSize
 let rainbowColors
 let shading
 let eraser
+let currentPenColor
+let currentBgColor
 
 // Getting all necessary elements from the DOM
 const canvas = document.querySelector("#canvas")
@@ -58,6 +65,8 @@ const clearGrid = document.querySelector("#clear")
 const radioButtons = document.querySelectorAll("input[type='radio']")
 const penColor = document.querySelector("#pen_color")
 const bgColor = document.querySelector("#bg_color")
+const penRecentView = document.querySelector("#recent_pen_colors")
+const bgRecentView = document.querySelector("#recent_bg_colors")
 
 
 const createGridElement = width => {
@@ -246,6 +255,66 @@ radioButtons.forEach(radioButton => {
     })
 });
 
+const createRecentViewElement = color => {
+    let viewItem = document.createElement("li")
+    viewItem.style.color = color  // TODO: Don't forget to change the color to RGB
+    
+    let deleteButton = document.createElement("i")
+    deleteButton.setAttribute("data-feather", "trash-2")
+    deleteButton.classList.add("colors__icon")
+    viewItem.appendChild(deleteButton)
+
+    return viewItem
+}
+
+const updateRecentView = (type, colors) => {
+    let elementToWorkOn = type === "pen" ? penRecentView : bgRecentView
+    // Reset it to empty element before adding anything
+    elementToWorkOn.innerHTML = ""
+    
+    colors.forEach(color => {
+        elementToWorkOn.appendChild(createRecentViewElement(color))
+    })
+    feather.replace()
+}
+
+const getCurrentThemeBg = () => {
+    return getComputedStyle(document.body).getPropertyValue("--primary")
+}
+
+// A code to check whether the 
+// colorsArr = ["#648c11", "#9932cc", "#ff4500", "#cf1020", "#ffdf00"]
+// localStorage.setItem("penColor", colorsArr)
+// localStorage.setItem("bgColor", colorsArr)
+
+const setInitialColor = type => {
+    let colorsOnLocalStorage = localStorage.getItem(type + "Color")
+    colorsOnLocalStorage = colorsOnLocalStorage ? 
+        colorsOnLocalStorage.split(",") : ""
+    // TODO: Convert colors to RGB or HEX
+
+    if (type == "pen") {
+        currentPenColor = colorsOnLocalStorage ? 
+            colorsOnLocalStorage[colorsOnLocalStorage.length - 1] :
+            DEFAULT_PEN_COLOR
+        // set the value on the color picker
+        penColor.value = currentPenColor
+    } else {
+        currentBgColor = colorsOnLocalStorage ? colorsOnLocalStorage[
+            colorsOnLocalStorage.length - 1] : getCurrentThemeBg()
+        bgColor.value = currentBgColor
+
+        if (colorsOnLocalStorage)
+            canvas.style.backgroundColor = currentBgColor
+    }
+
+    // update the recent view, if it only exists
+    if (colorsOnLocalStorage)
+        updateRecentView(type, colorsOnLocalStorage.reverse())
+}
+
 // initializing the grids
 setInitialGridSize()
 setInitialGridLines()
+setInitialColor("pen")
+setInitialColor("bg")
