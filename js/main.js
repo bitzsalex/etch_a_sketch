@@ -11,7 +11,6 @@ let rainbowColors
 let shading
 let eraser
 let currentPenColor
-let currentBgColor
 let isMouseDownEventFired = false
 let lightenDarkenValue = 15
 
@@ -89,6 +88,15 @@ const getShadedColor = (shading, currentColor) => {
 
     return selectedColor
 }
+
+// CODE: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+// const convertHEXToRGB = hex => {
+//     // match each value to the group and then parseInt using HEX
+//     let group = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+//     return group ?
+//         `rgb(${parseInt(group[1], 16)}, ${parseInt(group[2], 16)}, ${parseInt(group[3], 16)})`
+//         : null
+// }
 
 const draw = gridItem => {
     let currentColor = gridItem.style.backgroundColor
@@ -287,14 +295,6 @@ radioButtons.forEach(radioButton => {
     })
 });
 
-const convertHEXToRGB = hex => {
-    // match each value to the group and then parseInt using HEX
-    let group = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return group ?
-        `rgb(${parseInt(group[1], 16)}, ${parseInt(group[2], 16)}, ${parseInt(group[3], 16)})`
-        : null
-}
-
 const createRecentViewElement = color => {
     let viewItem = document.createElement("li")
     viewItem.setAttribute("data-color", color)
@@ -373,12 +373,6 @@ const getCurrentThemeBg = () => {
     return getComputedStyle(document.body).getPropertyValue("--primary")
 }
 
-// A code to check whether the 
-// colorsArr = ["#648c11", "#9932cc", "#ff4500", "#55bfec", "#ffdf00"]
-// colorsArr = ["#648c11", "#9932cc", "#ff4500", "#cf1020", "#ffdf00"]
-// localStorage.setItem("penColors", colorsArr)
-// localStorage.setItem("bgColors", colorsArr)
-
 const setInitialColor = type => {
     let colorsOnLocalStorage = localStorage.getItem(type + "Colors")
     colorsOnLocalStorage = colorsOnLocalStorage ? 
@@ -391,7 +385,7 @@ const setInitialColor = type => {
         // set the value on the color picker
         penColor.value = currentPenColor
     } else {
-        currentBgColor = colorsOnLocalStorage ? colorsOnLocalStorage[
+        let currentBgColor = colorsOnLocalStorage ? colorsOnLocalStorage[
             colorsOnLocalStorage.length - 1] : getCurrentThemeBg()
         bgColor.value = currentBgColor
         canvas.style.backgroundColor = currentBgColor
@@ -407,7 +401,6 @@ const updateCurrentValues = (type, value) => {
         currentPenColor = value
         penColor.value = value
     } else {
-        currentBgColor = value
         bgColor.value = value
         canvas.style.backgroundColor = value
     }
@@ -460,12 +453,6 @@ downloadButton.addEventListener("click", () => {
     })
 })
 
-// initializing the grids
-setInitialGridSize()
-setInitialGridLines()
-setInitialColor("pen")
-setInitialColor("bg")
-
 
 
 // getting themeToggler button
@@ -501,8 +488,15 @@ const setTheme = () => {
     }
 }
 
+if (themeToggler)
+    themeToggler.addEventListener("click", toggleTheme)
+
+
 // setting the initial theme
 setTheme()
 
-if (themeToggler)
-    themeToggler.addEventListener("click", toggleTheme)
+// initializing the grids
+setInitialGridSize()
+setInitialGridLines()
+setInitialColor("pen")
+setInitialColor("bg")
