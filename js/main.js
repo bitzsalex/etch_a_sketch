@@ -255,9 +255,17 @@ radioButtons.forEach(radioButton => {
     })
 });
 
+const convertHEXToRGB = hex => {
+    // match each value to the group and then parseInt using HEX
+    let group = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    return group ?
+        `rgb(${parseInt(group[1], 16)}, ${parseInt(group[2], 16)}, ${parseInt(group[3], 16)})`
+        : null
+}
+
 const createRecentViewElement = color => {
     let viewItem = document.createElement("li")
-    viewItem.style.color = color  // TODO: Don't forget to change the color to RGB
+    viewItem.style.color = color
     
     let deleteButton = document.createElement("i")
     deleteButton.setAttribute("data-feather", "trash-2")
@@ -283,15 +291,15 @@ const getCurrentThemeBg = () => {
 }
 
 // A code to check whether the 
+// colorsArr = ["#648c11", "#9932cc", "#ff4500", "#55bfec", "#ffdf00"]
 // colorsArr = ["#648c11", "#9932cc", "#ff4500", "#cf1020", "#ffdf00"]
-// localStorage.setItem("penColor", colorsArr)
-// localStorage.setItem("bgColor", colorsArr)
+// localStorage.setItem("penColors", colorsArr)
+// localStorage.setItem("bgColors", colorsArr)
 
 const setInitialColor = type => {
-    let colorsOnLocalStorage = localStorage.getItem(type + "Color")
+    let colorsOnLocalStorage = localStorage.getItem(type + "Colors")
     colorsOnLocalStorage = colorsOnLocalStorage ? 
         colorsOnLocalStorage.split(",") : ""
-    // TODO: Convert colors to RGB or HEX
 
     if (type == "pen") {
         currentPenColor = colorsOnLocalStorage ? 
@@ -312,6 +320,43 @@ const setInitialColor = type => {
     if (colorsOnLocalStorage)
         updateRecentView(type, colorsOnLocalStorage.reverse())
 }
+
+const updateCurrentValues = (type, value) => {
+    if (type === "pen") currentPenColor = value
+    else {
+        currentBgColor = value
+        canvas.style.backgroundColor = value
+    }
+}
+
+const updateLocalColors = (type, value) => {
+    let workingStorage = type + "Colors"
+    let theColors = localStorage.getItem(workingStorage) ?? ""
+    console.log(theColors)
+    if (theColors) {
+        theColors = theColors.split(",")
+        let valueIndex = theColors.indexOf(value)
+
+        if (valueIndex !== -1)
+            theColors.splice(valueIndex, 1)
+
+        theColors.push(value)
+        if (theColors.length > 5) theColors.shift()
+    } else
+        theColors = [value]
+
+    localStorage.setItem(workingStorage, theColors)
+    updateCurrentValues(type, value)
+    updateRecentView(type, theColors.reverse())
+}
+
+bgColor.addEventListener("change", () => {
+    updateLocalColors("bg", bgColor.value)
+})
+
+penColor.addEventListener("change", () => {
+    updateLocalColors("pen", penColor.value)
+})
 
 // initializing the grids
 setInitialGridSize()
