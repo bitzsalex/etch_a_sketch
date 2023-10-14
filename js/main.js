@@ -278,6 +278,20 @@ const createRecentViewElement = color => {
     return viewItem
 }
 
+const deleteColor = colorNode => {
+    let parent = colorNode.parentNode
+    let type = parent === penRecentView ? "pen" : "bg"
+    let color = colorNode.getAttribute("data-color")
+    let colors = localStorage.getItem(type + "Colors").split(",")
+    let colorIndex = colors.indexOf(color)
+    
+    if (colorIndex !== -1) {
+        colors.splice(colorIndex, 1)
+        localStorage.setItem(type + "Colors", colors)
+    }
+    parent.removeChild(colorNode)
+}
+
 const attachSelectEventListener = (type, buttons) => {
     buttons.forEach(button => {
         button.addEventListener("click", () => {
@@ -292,6 +306,10 @@ const attachDeleteEventListener = (type, buttons) => {
     buttons.forEach(button => {
         button.addEventListener("click", event => {
             event.stopPropagation()
+            let type = button.parentNode.parentNode === penRecentView ?
+                "pen" : "bg"
+            deleteColor(button.parentNode)
+            setInitialColor(type)
         })
     })
 }
@@ -343,9 +361,7 @@ const setInitialColor = type => {
         currentBgColor = colorsOnLocalStorage ? colorsOnLocalStorage[
             colorsOnLocalStorage.length - 1] : getCurrentThemeBg()
         bgColor.value = currentBgColor
-
-        if (colorsOnLocalStorage)
-            canvas.style.backgroundColor = currentBgColor
+        canvas.style.backgroundColor = currentBgColor
     }
 
     // update the recent view, if it only exists
