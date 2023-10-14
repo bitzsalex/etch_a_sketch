@@ -27,6 +27,7 @@ const penColor = document.querySelector("#pen_color")
 const bgColor = document.querySelector("#bg_color")
 const penRecentView = document.querySelector("#recent_pen_colors")
 const bgRecentView = document.querySelector("#recent_bg_colors")
+const downloadButton = document.querySelector(".btn--download")
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -367,6 +368,24 @@ bgColor.addEventListener("change", () => {
 
 penColor.addEventListener("change", () => {
     updateLocalColors("pen", penColor.value)
+})
+
+
+// code reference: https://stackoverflow.com/questions/31656689/how-to-save-img-to-users-local-computer-using-html2canvas
+const saveAs = (blob, fileName) => {
+    const link = document.createElement('a');
+    link.download = fileName
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
+downloadButton.addEventListener("click", () => {
+    html2canvas(canvas).then(canvas => {
+        canvas.toBlob(blob => {
+            saveAs(blob, "Etch-a-Sketch.jpg")
+        })
+    })
 })
 
 // initializing the grids
