@@ -12,6 +12,8 @@ let shading
 let eraser
 let currentPenColor
 let currentBgColor
+let isMouseDownEventFired = false
+let lightenDarkenValue = 15
 
 // Getting all necessary elements from the DOM
 const canvas = document.querySelector("#canvas")
@@ -35,14 +37,96 @@ const createGridElement = width => {
     return gridItem
 }
 
+const getARandomColor = type => {
+    let selectedColor = ""
+
+    if (type === "recent") {
+        let colors = localStorage.getItem("penColors") ?? ""
+        colors = colors ? colors.split(",") : []
+
+        if (colors.length >= 2)
+            selectedColor =  colors[Math.floor(Math.random() * colors.length)]
+    } else {
+        let color1 = Math.floor(Math.random() * 256);
+        let color2 = Math.floor(Math.random() * 256);
+        let color3 = Math.floor(Math.random() * 256);
+        selectedColor = `rgb(${color1}, ${color2}, ${color3})`;
+    }
+
+    return selectedColor
+}
+
+const darkenColor = (red, green, blue) => {
+    red = Math.max(red - lightenDarkenValue, 0)
+    green = Math.max(green - lightenDarkenValue, 0)
+    blue = Math.max(blue - lightenDarkenValue, 0)
+
+    return `rgb(${red}, ${green}, ${blue})`
+}
+
+const lightenColor = (red, green, blue) => {
+    red = Math.min(red + lightenDarkenValue, 255)
+    green = Math.min(green + lightenDarkenValue, 255)
+    blue = Math.min(blue + lightenDarkenValue, 255)
+
+    return `rgb(${red}, ${green}, ${blue})`
+}
+
+const getShadedColor = (shading, currentColor) => {
+    let selectedColor = ""
+    if (!currentColor)
+        selectedColor = shading === "darken" ? "rgb(255, 255, 255)" : ""
+    else
+        selectedColor = currentColor
+
+    if (selectedColor) {
+        let group = 
+            /^rgb\(\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\s*\)$/i.exec(selectedColor)
+        selectedColor = shading === "lighten" ?
+            lightenColor(Number(group[1]), Number(group[2]), Number(group[3])) :
+            darkenColor(Number(group[1]), Number(group[2]), Number(group[3]))
+    }
+
+    return selectedColor
+}
+
+const draw = gridItem => {
+    let currentColor = gridItem.style.backgroundColor
+    let selectedColor = ""
+
+    if (rainbowColors) {  // if rainbow is set
+        selectedColor = getARandomColor(rainbowColors)
+    } else if (shading) {  // if shading is set
+        selectedColor = getShadedColor(shading, currentColor)
+    } else if (eraser) {  // if eraser is set
+        selectedColor = ""
+    } else 
+        selectedColor = currentPenColor
+
+    if (selectedColor)
+        gridItem.style.backgroundColor = selectedColor
+    else
+        gridItem.style.backgroundColor = ""
+}
+
 const generateGrids = size => {
     // before generating any grid empty the canvas first
     canvas.innerHTML = ""
-
     let maxWidth = 100 / size
 
     for (itr = 1; itr <= size ** 2; itr++) {
         gridItem = createGridElement(maxWidth)
+        gridItem.addEventListener("mousedown", event => {
+            isMouseDownEventFired = true
+            draw(event.target)
+        })
+        gridItem.addEventListener("mouseup", () => {
+            isMouseDownEventFired = false
+        })
+        gridItem.addEventListener("mouseover", event => {
+            if (isMouseDownEventFired)
+                draw(event.target)
+        })
         canvas.appendChild(gridItem)
     }
 }
@@ -189,27 +273,15 @@ radioButtons.forEach(radioButton => {
                 // Before checking the value, reset the other options
                 eraser = rainbowColors = ""
                 shading = checkAndGetRadioButtonValues(shading, radioButton)
-
-                if (shading) {
-                    console.log("call shading function")
-                }
                 break
             case "rainbow":
                 eraser = shading = ""
                 rainbowColors = checkAndGetRadioButtonValues(
                     rainbowColors, radioButton)
-
-                if (rainbowColors) {
-                    console.log("call the rainbow function")
-                }
                 break
             case "eraser":
                 shading = rainbowColors = ""
                 eraser = checkAndGetRadioButtonValues(eraser, radioButton)
-
-                if (eraser) {
-                    console.log("call the erase function")
-                }
                 break
         }
     })
