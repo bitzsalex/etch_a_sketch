@@ -56,6 +56,8 @@ const gridSizeDecrementor = document.querySelector("button#grid_size_dec")
 const gridLinesToggler = document.querySelector("#grid-lines")
 const clearGrid = document.querySelector("#clear")
 const radioButtons = document.querySelectorAll("input[type='radio']")
+const penColor = document.querySelector("#pen_color")
+const bgColor = document.querySelector("#bg_color")
 
 
 const createGridElement = width => {
@@ -169,8 +171,10 @@ gridSizeDecrementor.addEventListener("click", () => {
 })
 
 const setInitialGridLines = () => {
-    if (localStorage.getItem("gridLines"))
+    if (localStorage.getItem("gridLines")) {
         canvas.classList.add("canvas--grid-lines")
+        gridLinesToggler.checked = true
+    }
 }
 
 gridLinesToggler.addEventListener("change", () => {
@@ -223,7 +227,8 @@ radioButtons.forEach(radioButton => {
                 break
             case "rainbow":
                 eraser = shading = ""
-                rainbowColors = checkAndGetRadioButtonValues(rainbowColors, radioButton)
+                rainbowColors = checkAndGetRadioButtonValues(
+                    rainbowColors, radioButton)
 
                 if (rainbowColors) {
                     console.log("call the rainbow function")
