@@ -29,6 +29,7 @@ const bgColor = document.querySelector("#bg_color")
 const penRecentView = document.querySelector("#recent_pen_colors")
 const bgRecentView = document.querySelector("#recent_bg_colors")
 const downloadButton = document.querySelector(".btn--download")
+const recentButton = document.querySelector("#recent")
 
 const createGridElement = width => {
     let gridItem = document.createElement("div")
@@ -355,6 +356,11 @@ const updateColorButtons = (type, parent) => {
     attachDeleteEventListener(type, deleteButtons)
 }
 
+const enableDisableRecentButton = size => {
+    if (size < 2) recentButton.setAttribute("disabled", true)
+    else recentButton.removeAttribute("disabled")
+}
+
 const updateRecentView = (type, colors) => {
     let elementToWorkOn = type === "pen" ? penRecentView : bgRecentView
     
@@ -366,6 +372,7 @@ const updateRecentView = (type, colors) => {
     })
 
     updateColorButtons(type, elementToWorkOn)
+    enableDisableRecentButton(colors.length)
     feather.replace()
 }
 

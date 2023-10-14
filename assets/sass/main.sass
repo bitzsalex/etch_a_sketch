@@ -183,8 +183,6 @@ main
 
     &__recent
         li
-            // will be set according to the choice using js
-            // color: red
             width: 40px
             height: 40px
             background-color: currentColor
@@ -295,6 +293,9 @@ main
         input[type="checkbox"]:checked + label
             color: #fff
             background-color: var(--color-link)
+
+        input:disabled + label
+            cursor: not-allowed
 
         input[type="text"]
             -webkit-appearance: none

@@ -320,6 +320,10 @@ main {
   background-color: var(--color-link);
 }
 
+.group__item input:disabled + label {
+  cursor: not-allowed;
+}
+
 .group__item input[type="text"] {
   -webkit-appearance: none;
   outline: none;
