@@ -233,12 +233,21 @@ main {
   position: absolute;
   background-color: var(--primary);
   border-radius: 4px;
-  padding: 4px;
+  padding: 2px 4px;
   top: 0px;
   right: -10px;
   transition: all .5s;
   visibility: hidden;
   opacity: 0;
+}
+
+.colors__icon > svg {
+  width: 18px;
+  height: 18px;
+}
+
+.colors__icon:hover {
+  color: crimson;
 }
 
 .colors input[type="color"] {

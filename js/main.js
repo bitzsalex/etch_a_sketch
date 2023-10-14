@@ -68,7 +68,6 @@ const bgColor = document.querySelector("#bg_color")
 const penRecentView = document.querySelector("#recent_pen_colors")
 const bgRecentView = document.querySelector("#recent_bg_colors")
 
-
 const createGridElement = width => {
     let gridItem = document.createElement("div")
     gridItem.style.width = width + "%"
@@ -265,24 +264,57 @@ const convertHEXToRGB = hex => {
 
 const createRecentViewElement = color => {
     let viewItem = document.createElement("li")
+    viewItem.setAttribute("data-color", color)
     viewItem.style.color = color
     
-    let deleteButton = document.createElement("i")
-    deleteButton.setAttribute("data-feather", "trash-2")
+    let deleteButton = document.createElement("span")
     deleteButton.classList.add("colors__icon")
+
+    let deleteIcon = document.createElement("i")
+    deleteIcon.setAttribute("data-feather", "trash-2")
+    deleteButton.appendChild(deleteIcon)
     viewItem.appendChild(deleteButton)
 
     return viewItem
 }
 
+const attachSelectEventListener = (type, buttons) => {
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            let type = button.parentNode === penRecentView ? "pen" : "bg"
+            let value = button.getAttribute("data-color")
+            updateLocalColors(type, value)
+        })
+    })
+}
+
+const attachDeleteEventListener = (type, buttons) => {
+    buttons.forEach(button => {
+        button.addEventListener("click", event => {
+            event.stopPropagation()
+        })
+    })
+}
+
+const updateColorButtons = (type, parent) => {
+    let selectButtons = parent.querySelectorAll("li")
+    let deleteButtons = parent.querySelectorAll(".colors__icon")
+
+    attachSelectEventListener(type, selectButtons)
+    attachDeleteEventListener(type, deleteButtons)
+}
+
 const updateRecentView = (type, colors) => {
     let elementToWorkOn = type === "pen" ? penRecentView : bgRecentView
+    
     // Reset it to empty element before adding anything
     elementToWorkOn.innerHTML = ""
-    
+
     colors.forEach(color => {
         elementToWorkOn.appendChild(createRecentViewElement(color))
     })
+
+    updateColorButtons(type, elementToWorkOn)
     feather.replace()
 }
 
@@ -322,9 +354,12 @@ const setInitialColor = type => {
 }
 
 const updateCurrentValues = (type, value) => {
-    if (type === "pen") currentPenColor = value
-    else {
+    if (type === "pen") {
+        currentPenColor = value
+        penColor.value = value
+    } else {
         currentBgColor = value
+        bgColor.value = value
         canvas.style.backgroundColor = value
     }
 }
@@ -332,7 +367,7 @@ const updateCurrentValues = (type, value) => {
 const updateLocalColors = (type, value) => {
     let workingStorage = type + "Colors"
     let theColors = localStorage.getItem(workingStorage) ?? ""
-    console.log(theColors)
+    
     if (theColors) {
         theColors = theColors.split(",")
         let valueIndex = theColors.indexOf(value)
